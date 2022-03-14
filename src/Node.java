@@ -6,9 +6,11 @@ public class Node {
 	private Node[] emptyNodes;//Nodes linked with checked array. After a node from this list is used for searching its index must be marked as true on checked array
 	private boolean[] checked;
 	private int count;
+	private boolean terminal;
 	public Node(String name) {
 		this.name = name;
 		this.nextLines = new LinkedList<LinkedList<Node>>();
+		this.terminal = true;
 	}
 	public Node(String name, int emptySize) {
 		//A node with additional arrays to limit its use
@@ -25,6 +27,12 @@ public class Node {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public boolean isTerminal() {
+		return terminal;
+	}
+	public void setTerminal(boolean terminal) {
+		this.terminal = terminal;
 	}
 	public void addLine(LinkedList<Node> line) {
 		nextLines.add(line);

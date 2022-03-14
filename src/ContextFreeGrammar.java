@@ -59,6 +59,7 @@ public class ContextFreeGrammar {
 					node = new Node(firstSplit[0]);
 					nodes.add(node);
 				}
+				node.setTerminal(false);
 				String[] secondSplit = firstSplit[1].split("\\|");//Splitting to expressions
 				for (int i = 0; i < secondSplit.length; i++) {
 					LinkedList<Node> nextValue = new LinkedList<Node>();
@@ -209,12 +210,13 @@ public class ContextFreeGrammar {
 	}
 	
 	private void nodeCheck(String input) {
-		//Checks if the inputs every character is a node
-		//If one of the characters is not a node then this string does not belong to the language
+		//Checks if the inputs every character is a terminal
+		//If one of the characters is not a terminal then this string does not belong to the language
 		for (int i = 0; i < input.length(); i++) {
 			Node node = searchNode(String.valueOf(input.charAt(i)), nodes);
-			if(node == null) {
+			if(node == null || !node.isTerminal()) {
 				//Couldn't find a node with this character
+				//or the node is not a terminal
 				//So this string does not belong to the language
 				System.out.println("This string does not belong to the language.");
 				System.exit(2);
